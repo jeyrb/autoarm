@@ -1,10 +1,11 @@
 # Alarm Panel Auto Arming
 
-Automatically manage Alarm Control Panel integration
+Automatically manage Home Assistant Alarm Control Panel integration
 
 * Switch between `armed_home` and `armed_away` based on time of day
 * Automatically re-arm when nobody at home
 * Automatically switch off `armed_away` mode when at least one person returns
+* Optionally disarm automatically if house occupied at end of usual bedtime
 * Use usual bed-time as alternative to sunrise/sunset
 * Allow manual override via remote buttons
 * Optional delay on selecting away mode via remote button
@@ -15,6 +16,8 @@ Automatically manage Alarm Control Panel integration
 Switch on module, and add configuration, using appdaemon `apps.yaml`
 
 ### Example
+
+Configure in the AppDaemon `apps.yaml` like this:
 
 ``` yaml
 alarm_arming:
