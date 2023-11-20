@@ -7,13 +7,6 @@ total_secs=lambda t: (t.hour*3600)+(t.minute*60)+t.second
 
 OVERRIDE_STATES=('armed_away','armed_vacation')
 ZOMBIE_STATES=('unknown','unavailable')
-ARMING_SERVICES={
-    'armed_night':'alarm_arm_night',
-    'armed_away':'alarm_arm_away',
-    'armed_home':'alarm_arm_home',
-    'armed_vacation':'alarm_arm_vacation',
-    'disarmed':'alarm_disarm'
-}
 
 class AlarmArming(hass.Hass):
 
@@ -141,13 +134,8 @@ class AlarmArming(hass.Hass):
     def arm(self,arming_state=None):
         existing_state=self.armed_state()
         if arming_state != existing_state:
-            service=ARMING_SERVICES.get(arming_state)
-            if service is None:
-                self.error('AUTOARM No service determined for arm (%s)' % arming_state)
-                service = "alarm_arm_home"
-            self.call_service('alarm_control_panel/%s' % service,
-                entity_id=self.alarm_panel)
-            self.log('AUTOARM Setting %s to %s (%s)' % (self.alarm_panel,arming_state,service))
+            self.set_state(self.alarm_panel,state=arming_state)
+            self.log('AUTOARM Setting %s from %s to %s' % (self.alarm_panel,existing_state,arming_state))
         else:
             self.log('Skipping arm, as %s already %s' % (self.alarm_panel,arming_state))
 

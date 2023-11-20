@@ -10,6 +10,7 @@ Automatically manage Home Assistant Alarm Control Panel integration
 * Allow manual override via remote buttons
 * Optional delay on selecting away mode via remote button
 * Support for mobile push actionable notifications
+* Designed to work with either the 'manual' or 'template' alarm control panel
 
 ## Configure
 
@@ -30,6 +31,7 @@ alarm_arming:
   sleep_start: "21:30:00"
   sleep_end: "06:30:00"
   # When away button pressed, how long to wait until armed, e.g. to lock up and leave
+  # Alternatively, configure this directly on the panel object if using Manual Control Panel
   arm_away_delay: "00:02:00"
   # Should the alarm be disarmed if house occupied and sleep period ended?
   auto_disarm: False
