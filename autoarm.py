@@ -220,12 +220,12 @@ class AlarmArming(hass.Hass):
         if self.is_occupied() and self.auto_disarm:
             self.arm("disarmed")
         else:
-            self.reset_at_home(hint_arming="armed_home")
+            self.reset_at_home(hint_arming="armed_home",force_arm=False)
 
     def on_sunrise(self, kwargs):
         self.log('AUTOARM Sunrise: %s' % kwargs)
         if not self.sunrise_cutoff or datetime.datetime.now().time() >= self.sunrise_cutoff:
-            self.reset_at_home(hint_arming="armed_home")
+            self.reset_at_home(hint_arming="armed_home",force_arm=False)
         elif self.sunrise_cutoff < self.sleep_end:
             sunrise_delay=total_secs(self.sleep_end)-total_secs(self.sunrise_cutoff)
             self.log('AUTOARM Rescheduling delayed sunrise action in %s seconds' % sunrise_delay)
