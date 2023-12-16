@@ -1,4 +1,4 @@
-import hassapi as hass
+import appdaemon.plugins.hass.hassapi as hass
 import datetime
 import time
 
@@ -109,11 +109,11 @@ class AlarmArming(hass.Hass):
         if existing_state != 'disarmed' or force_arm:
             if self.armed_state() not in OVERRIDE_STATES:
                 if hint_arming:
-                    self.arm(hint_arming)
+                    return self.arm(hint_arming)
                 elif self.is_night():
-                    self.arm('armed_night')
+                    return self.arm('armed_night')
                 else:
-                    self.arm('armed_home')
+                    return self.arm('armed_home')
 
     def delayed_arm(self,cbargs):
         self.log('Delayed_arm %s' % cbargs)
@@ -136,8 +136,10 @@ class AlarmArming(hass.Hass):
         if arming_state != existing_state:
             self.set_state(self.alarm_panel,state=arming_state)
             self.log('AUTOARM Setting %s from %s to %s' % (self.alarm_panel,existing_state,arming_state))
+            return arming_state
         else:
             self.log('Skipping arm, as %s already %s' % (self.alarm_panel,arming_state))
+            return existing_state
 
     def notify_flex(self,message,profile='normal',title=None):
         try:
