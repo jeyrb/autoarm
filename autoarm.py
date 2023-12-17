@@ -46,7 +46,8 @@ class AlarmArming(hass.Hass):
 
     def initialize_occupancy(self):
         ''' Configure occupants, and listen for changes in their state '''
-        self.occupants=self.args.get('occupants',())
+        self.occupants=self.config.get('occupants',self.args.get('occupants',()))
+        self.log('AUTOARM Occupancy determined by %s' % ','.join(self.occupants))
         for person in self.occupants:
             self.listen_state(self.on_occupancy_change, person)
         self.log('AUTOARM Occupied: %s, Unoccupied: %s, Night: %s' % (self.is_occupied(),

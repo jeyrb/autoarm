@@ -1,6 +1,6 @@
 from unittest import mock
 from appdaemon_testing.pytest import automation_fixture
-from apps.autoarm.autoarm import AlarmArming
+from autoarm import AlarmArming
 
 PANEL='alarm_control_panel.test_panel'
 

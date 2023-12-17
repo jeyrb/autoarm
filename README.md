@@ -16,6 +16,8 @@ Automatically manage Home Assistant Alarm Control Panel integration
 
 Switch on module, and add configuration, using appdaemon `apps.yaml`
 
+`occupants` can alternatively be declared at the `appdaemon.yaml` config, in the main `appdaemon` section.
+
 ### Example
 
 Configure in the AppDaemon `apps.yaml` like this:
